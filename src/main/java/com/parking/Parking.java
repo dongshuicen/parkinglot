@@ -26,4 +26,16 @@ public class Parking {
     public Car pickUp(ParkingTicket parkingTicket) {
         return parkingTicketCarMap.remove(parkingTicket);
     }
+
+    public boolean isFull() {
+        return capacity == parkingTicketCarMap.size();
+    }
+
+    public boolean hasCar(ParkingTicket parkingTicket) {
+        return parkingTicketCarMap.keySet().contains(parkingTicket);
+    }
+
+    public int calcEmptyRoomSize() {
+        return capacity - this.parkingTicketCarMap.size();
+    }
 }
