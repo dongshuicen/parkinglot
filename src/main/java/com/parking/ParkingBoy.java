@@ -4,33 +4,35 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-public class ParkingBoy {
-    private final List<Parking> parkings ;
+public class ParkingBoy implements Parking{
+    private final List<ParkingLot> parkingLots;
 
-    public ParkingBoy(Parking... parkings) {
-        this.parkings = Arrays.asList(parkings);
+    public ParkingBoy(ParkingLot... parkingLots) {
+        this.parkingLots = Arrays.asList(parkingLots);
     }
 
+    @Override
     public ParkingTicket park(Car car) {
-        Optional<Parking> firstParking = this.parkings.stream().filter(lot -> !lot.isFull()).findFirst();
+        Optional<ParkingLot> firstParking = this.parkingLots.stream().filter(lot -> !lot.isFull()).findFirst();
         if (firstParking.isPresent()) {
             return firstParking.get().park(car);
         }
         throw new ParkingFullException();
     }
 
+    @Override
     public Car pick(ParkingTicket ticket) {
-        Optional<Parking> park = searchParkingByTicket(ticket);
+        Optional<ParkingLot> park = searchParkingByTicket(ticket);
         if (park.isPresent()) {
             return park.get().pickUp(ticket);
         }
         throw new NoSuchCarException();
     }
 
-    public Optional<Parking> searchParkingByTicket(ParkingTicket parkingTicket) {
-        for (Parking parking : parkings) {
-            if (parking.hasCar(parkingTicket)) {
-                return Optional.of(parking);
+    public Optional<ParkingLot> searchParkingByTicket(ParkingTicket parkingTicket) {
+        for (ParkingLot parkingLot : parkingLots) {
+            if (parkingLot.hasCar(parkingTicket)) {
+                return Optional.of(parkingLot);
             }
         }
         return Optional.empty();
@@ -38,7 +40,7 @@ public class ParkingBoy {
 
 
 
-    public List<Parking> getParkings() {
-        return parkings;
+    public List<ParkingLot> getParkingLots() {
+        return parkingLots;
     }
 }

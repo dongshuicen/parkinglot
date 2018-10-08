@@ -5,15 +5,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class SmartParkingBoy extends ParkingBoy {
-    public SmartParkingBoy(Parking... parkings) {
-        super(parkings);
+    public SmartParkingBoy(ParkingLot... parkingLots) {
+        super(parkingLots);
     }
 
     @Override
     public ParkingTicket park(Car car) {
-        List<Parking> bakList = this.getParkings().stream().sorted(Comparator.comparingInt(Parking::calcEmptyRoomSize).reversed())
+        List<ParkingLot> bakList = this.getParkingLots().stream().sorted(Comparator.comparingInt(ParkingLot::calcEmptyRoomSize).reversed())
                 .collect(Collectors.toList());
-        Parking parking = bakList.get(0);
-        return parking.park(car);
+        ParkingLot parkingLot = bakList.get(0);
+        return parkingLot.park(car);
     }
 }
