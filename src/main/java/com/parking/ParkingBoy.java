@@ -20,12 +20,6 @@ public class ParkingBoy {
     }
 
     public Car pick(ParkingTicket ticket) {
-        /*for (Parking parking : parkings) {
-            Car car = parking.pickUp(ticket);
-            if (car != null) {
-                return car;
-            }
-        }*/
         Optional<Parking> park = searchParkingByTicket(ticket);
         if (park.isPresent()) {
             return park.get().pickUp(ticket);

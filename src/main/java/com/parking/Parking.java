@@ -38,4 +38,8 @@ public class Parking {
     public int calcEmptyRoomSize() {
         return capacity - this.parkingTicketCarMap.size();
     }
+
+    public double calcVacancyRate() {
+        return (capacity - this.parkingTicketCarMap.size())/capacity;
+    }
 }
