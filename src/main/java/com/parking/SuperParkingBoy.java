@@ -1,15 +1,11 @@
 package com.parking;
 
-import java.util.Arrays;
 import java.util.Comparator;
-import java.util.List;
 import java.util.Optional;
 
 public class SuperParkingBoy extends ParkingBoy{
-    private final List<ParkingLot> parkingLots;
     public SuperParkingBoy(ParkingLot... parkingLots) {
         super(parkingLots);
-        this.parkingLots = Arrays.asList(parkingLots);
     }
 
     @Override
