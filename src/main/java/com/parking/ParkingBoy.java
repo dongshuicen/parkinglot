@@ -43,4 +43,10 @@ public class ParkingBoy implements Parking{
     public List<ParkingLot> getParkingLots() {
         return parkingLots;
     }
+    public int calcParkingLotSize() {
+        return this.parkingLots.stream().mapToInt(ParkingLot::getCapacity).sum();
+    }
+    public int calcAvaliableParkingLotSize() {
+        return this.parkingLots.stream().mapToInt(ParkingLot::calcEmptyRoomSize).sum();
+    }
 }
