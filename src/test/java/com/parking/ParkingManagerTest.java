@@ -106,4 +106,49 @@ public class ParkingManagerTest {
         assertThat(simpleCar).isEqualTo(oneCar);
 
     }
+    @Test
+    public void parking_lot_size_equals_4_when_manager_calc_all_parking_lot_size() {
+        //given
+        List<ParkingLot> parkingLots = Lists.newArrayList();
+        ParkingLot parkingLot = new ParkingLot(4);
+        parkingLots.add(parkingLot);
+        ParkingManager manager = new ParkingManager(parkingLots);
+        manager.park(new Car("one"));
+        //when
+        int size = manager.calcAllParkingLotsSize();
+        //then
+        assertThat(size).isEqualTo(4);
+    }
+    @Test
+    public void parking_lot_size_equals_3_when_manager_calc_avaliable_parking_lot_size() {
+        //given
+        List<ParkingLot> parkingLots = Lists.newArrayList();
+        ParkingLot parkingLot = new ParkingLot(4);
+        parkingLots.add(parkingLot);
+        ParkingManager manager = new ParkingManager(parkingLots);
+        manager.park(new Car("one"));
+        //when
+        int avaliableParkingLotsSize = manager.calcAllAvaliableParkingLotsSize();
+        //then
+        assertThat(avaliableParkingLotsSize).isEqualTo(3);
+    }
+    @Test
+    public void parking_when_manager_calc_avaliable_parking_lot_size() {
+        //given
+        List<ParkingLot> parkingLots = Lists.newArrayList();
+        ParkingLot parkingLot = new ParkingLot(10);
+        parkingLots.add(parkingLot);
+        ParkingLot superParkingBoyLot1 = new ParkingLot(2);
+        ParkingLot superParkingBoyLot2 = new ParkingLot(3);
+        ParkingBoy superParkingBoy = new SuperParkingBoy(superParkingBoyLot1,superParkingBoyLot2);
+        ParkingLot smartParkingBoyLot = new ParkingLot(5);
+        ParkingBoy smartParkingBoy = new SmartParkingBoy(smartParkingBoyLot);
+        ParkingManager manager = new ParkingManager(parkingLots,superParkingBoy,smartParkingBoy);
+        manager.park(new Car("one"));
+        //when
+        int avaliableParkingLotsSize = manager.calcAllAvaliableParkingLotsSize();
+        //then
+        assertThat(avaliableParkingLotsSize).isEqualTo(19);
+    }
+
 }
