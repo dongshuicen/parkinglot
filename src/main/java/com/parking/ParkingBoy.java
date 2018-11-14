@@ -43,10 +43,16 @@ public class ParkingBoy implements Parking{
     public List<ParkingLot> getParkingLots() {
         return parkingLots;
     }
+    @Override
     public int calcParkingLotSize() {
         return this.parkingLots.stream().mapToInt(ParkingLot::getCapacity).sum();
     }
-    public int calcAvaliableParkingLotSize() {
+    @Override
+    public int calcAvailableParkingLotSize() {
         return this.parkingLots.stream().mapToInt(ParkingLot::calcEmptyRoomSize).sum();
+    }
+    @Override
+    public int calcParkingCarNum() {
+        return this.parkingLots.stream().mapToInt(ParkingLot::calcParkingCarNumber).sum();
     }
 }

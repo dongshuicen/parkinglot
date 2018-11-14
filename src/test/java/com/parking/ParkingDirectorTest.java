@@ -10,6 +10,7 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 public class ParkingDirectorTest {
     @Test
     public void out_put_receipt() {
+        //given
         List<ParkingLot> parkingLots = Lists.newArrayList();
         ParkingLot manageParkingLot = new ParkingLot(10);
         parkingLots.add(manageParkingLot);
@@ -25,9 +26,10 @@ public class ParkingDirectorTest {
         ParkingTicket fouthTicket = manager.park(superParkingBoy, new Car("fouth car"));
         Car fiveCar = new Car("five car");
         ParkingTicket fiveTicket = manager.park(smartParkingBoy, fiveCar);
-        System.out.println("M  "+manager.calcParkingBoyAvaliableParkingLotsSize());
         Car pickUpCar = manager.pickUpCarParkingBoy(fiveTicket);
         assertThat(pickUpCar).isEqualTo(fiveCar);
+        ParkingDirector director = new ParkingDirector(manager);
+        director.printReport();
 
     }
 }

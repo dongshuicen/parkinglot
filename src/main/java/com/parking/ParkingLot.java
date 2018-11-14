@@ -47,4 +47,8 @@ public class ParkingLot {
     public int getCapacity() {
         return capacity;
     }
+
+    public int calcParkingCarNumber() {
+        return this.parkingTicketCarMap.size();
+    }
 }
